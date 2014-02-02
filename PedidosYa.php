@@ -27,6 +27,10 @@ class PedidosYa{
 	public function delete($fecha, $userid){
 		return $this->DBC('DELETE FROM pedido WHERE fecha='.$fecha.' AND id_cliente='.$userid,1);
 	}
+
+	public function platos(){
+		return $this->DBC('SELECT * FROM platos',0);
+	}
 	/*NOMBRE: DBC
 	  PARÁMETROS: $query -> String
 	  DETALLES: Dado el String $query, que es una sentencia sql

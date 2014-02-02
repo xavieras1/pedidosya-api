@@ -22,6 +22,9 @@ if (isset($_REQUEST['request'])) {
 			print json_encode($modelo->registro($_REQUEST['user'],$_REQUEST['contrasena'],
 				$_REQUEST['ruc'],$_REQUEST['name']));
 			break;
+		case 'platos':
+			print json_encode($modelo->platos());
+			break;
 		// case 'pedido':
 		// 	print json_encode($modelo->save($_REQUEST['userid'],$_REQUEST));
 		// 	break;
