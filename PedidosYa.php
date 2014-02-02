@@ -2,8 +2,8 @@
 class PedidosYa{
 
 	public function login($user, $contrasena){
-		if ($loggued_in_user_info = $this->DBC('SELECT * FROM clientes 
-			WHERE usuario=\''.mysql_real_escape_string($user).'\' 
+		if ($loggued_in_user_info = $this->DBC('SELECT * FROM cliente 
+			WHERE user=\''.mysql_real_escape_string($user).'\' 
 			AND contrasena=\''.mysql_real_escape_string($contrasena).'\'',0)) {
 			return array('error'=>0, 'data'=>$loggued_in_user_info);
 		}else{
@@ -12,20 +12,20 @@ class PedidosYa{
 	}
 
 	public function registro($user, $contrasena,$ruc,$name){
-		if ($loggued_in_user_info = $this->DBC('SELECT * FROM clientes 
-			WHERE usuario=\''.mysql_real_escape_string($user).'\'',0 )){
+		if ($loggued_in_user_info = $this->DBC('SELECT * FROM cliente 
+			WHERE user=\''.mysql_real_escape_string($user).'\'',0 )){
 			return array('error'=>2,'descriptionerror'=>'Nombre de Usuario en uso.');
 		}else{
 			//esta función ya retorna el ID del usuario registrado.
-			return $this->DBC('INSERT INTO clientes SET user=\''.mysql_real_escape_string($user).'\',
+			return $this->DBC('INSERT INTO cliente SET user=\''.mysql_real_escape_string($user).'\',
 			 contasena=\''.mysql_real_escape_string($contrasena).'\', 
-			 ruc=\''.mysql_real_escape_string($ruc).'\',
+			 ci_ruc=\''.mysql_real_escape_string($ruc).'\',
 			 nombre=\''.mysql_real_escape_string($name).'\'',1);
 		}
 	}
 
 	public function delete($fecha, $userid){
-		return $this->DBC('DELETE FROM pedidos WHERE fecha='.$fecha.' AND userid='.$userid,1);
+		return $this->DBC('DELETE FROM pedido WHERE fecha='.$fecha.' AND id_cliente='.$userid,1);
 	}
 	/*NOMBRE: DBC
 	  PARÁMETROS: $query -> String
