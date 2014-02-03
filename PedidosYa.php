@@ -31,6 +31,10 @@ class PedidosYa{
 	public function platos(){
 		return $this->DBC('SELECT * FROM platos',0);
 	}
+
+	public function save($userid, $platos){
+		//TODO
+	}
 	/*NOMBRE: DBC
 	  PARÁMETROS: $query -> String
 	  DETALLES: Dado el String $query, que es una sentencia sql

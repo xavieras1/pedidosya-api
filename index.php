@@ -27,11 +27,11 @@ if (isset($_REQUEST['data'])) {
 		case 'platos':
 			print json_encode($modelo->platos());
 			break;
-		// case 'pedido':
-		// 	print json_encode($modelo->save($_REQUEST['userid'],$_REQUEST));
-		// 	break;
+		case 'pedido':
+			print json_encode($modelo->save($json->data->userid,$json->data->platos));
+			break;
 		case 'eliminar':
-			print json_encode($modelo->delete($_REQUEST['fecha'],$_REQUEST['userid']));
+			print json_encode($modelo->delete($json->data->fecha,$json->data->userid));
 			break;
 		default:
 			print json_encode(array('error'=>104,'descriptionerror'=>'Requerimiento '.
