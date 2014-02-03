@@ -2,7 +2,7 @@
 include('PedidosYa.php');
 
 
-if (isset($_REQUEST['request'])) {
+if (isset($_REQUEST['data'])) {
 	$modelo = new PedidosYa();
 
 	$lnk = mysql_connect('localhost', 'root','root')or die (
@@ -14,13 +14,15 @@ if (isset($_REQUEST['request'])) {
 		print json_encode( array('error'=>103,'descriptionerror'=>'dberror: NO Se pudo '.
 			'conectar-> '. mysql_error() ))
 	);
-	switch ($_REQUEST['request']) {
+
+	$json=json_decode($_REQUEST['data']);
+
+	switch ($json->request) {
 		case 'login':
-			print json_encode($modelo->login($_REQUEST['user'],$_REQUEST['contrasena']));
+			print json_encode($modelo->login($json->data->user,$json->data->contrasena));
 			break;
 		case 'registro':
-			print json_encode($modelo->registro($_REQUEST['user'],$_REQUEST['contrasena'],
-				$_REQUEST['ruc'],$_REQUEST['name']));
+			print json_encode($modelo->registro($json->data->user,$json->data->contrasena,$json->data->ruc,$json->data->name));
 			break;
 		case 'platos':
 			print json_encode($modelo->platos());
@@ -37,6 +39,6 @@ if (isset($_REQUEST['request'])) {
 	}
 }
 else
-	print json_encode(array('error'=>100,'descriptionerror'=>'No existe \'request\' en el '.
+	print json_encode(array('error'=>100,'descriptionerror'=>'No existe \'data\' en el '.
 		'requerimiento web'));
 ?>

@@ -5,7 +5,7 @@ class PedidosYa{
 		if ($loggued_in_user_info = $this->DBC('SELECT * FROM cliente 
 			WHERE user=\''.mysql_real_escape_string($user).'\' 
 			AND contrasena=\''.mysql_real_escape_string($contrasena).'\'',0)) {
-			return array('error'=>0, 'data'=>$loggued_in_user_info);
+			return array('error'=>0, 'data'=>$loggued_in_user_info[0]);
 		}else{
 			return array('error'=>2,'descriptionerror'=>'Combinación Email/Password incorrecta.');
 		}
@@ -18,7 +18,7 @@ class PedidosYa{
 		}else{
 			//esta función ya retorna el ID del usuario registrado.
 			return $this->DBC('INSERT INTO cliente SET user=\''.mysql_real_escape_string($user).'\',
-			 contasena=\''.mysql_real_escape_string($contrasena).'\', 
+			 contrasena=\''.mysql_real_escape_string($contrasena).'\', 
 			 ci_ruc=\''.mysql_real_escape_string($ruc).'\',
 			 nombre=\''.mysql_real_escape_string($name).'\'',1);
 		}
@@ -53,7 +53,7 @@ class PedidosYa{
 			mysql_free_result($result);
 			return $rows;
 		}
-		return  array('id' => mysql_insert_id());//id de editar
+		return  array('error'=>0,'id' => mysql_insert_id());//id de editar
 	}
 }
 ?>
